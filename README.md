@@ -2,6 +2,8 @@
 
 Portune是一个适用于[HoshinoBot](https://github.com/Ice-Cirno/HoshinoBot) v2的PCR角色每日运势插件，在nonebot插件vortune原代码基础上改动以适配Hoshino
 
+本Jag在原有代码基础上改动，增加抽[角色]签功能。例如，抽姐姐签，抽暴弓签。
+
 ## 安装方法：
 
 - 将`portune`文件夹复制到`hoshino\modules`文件夹下；

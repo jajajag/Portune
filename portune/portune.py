@@ -11,6 +11,7 @@ from hoshino.typing import *
 from .luck_desc import luck_desc
 from .luck_type import luck_type
 from PIL import Image, ImageSequence, ImageDraw, ImageFont
+from _pcr_data import CHARA_ID
 
 
 sv_help = '''
@@ -26,6 +27,7 @@ lmt = DailyNumberLimiter(5)
 Data_Path = hoshino.config.RES_DIR
 #也可以直接填写为res文件夹所在位置，例：absPath = "C:/res/"
 Img_Path = 'portunedata/imgbase'
+DEFAULT = 0
 
 
 @sv.on_prefix(('抽签', '人品', '运势'), only_to_me=True)
@@ -35,25 +37,29 @@ async def portune(bot, ev):
         await bot.finish(ev, f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
     lmt.increase(uid)
 
-    model = 'DEFAULT'
+    model = DEFAULT
 
     pic = drawing_pic(model)
     await bot.send(ev, pic, at_sender=True)
 
 
-@sv.on_fullmatch(('抽臭鼬签', '抽猫猫签', '抽凯露签'))
-async def portune_kyaru(bot, ev):
+@sv.on_fullmatch(('^抽.+签$'))
+async def portune_chara(bot, ev):
     uid = ev.user_id
     if not lmt.check(uid):
         await bot.finish(ev, f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
     lmt.increase(uid)
 
-    model = 'KYARU'
+    # Extract the name of the character
+    name = ev.message.extract_plain_text().strip()[1:-1]
+    if name in CHARA_ID:
+        # Map the name to its id
+        model = CHARA_ID[name]
+    else:
+        model = 0
 
     pic = drawing_pic(model)
     await bot.send(ev, pic, at_sender=True)
-
-
 
 
 def drawing_pic(model) -> Image:
@@ -62,10 +68,12 @@ def drawing_pic(model) -> Image:
         'text': R.img('portunedata/font/sakura.ttf').path
     }
 
-    if model == 'KYARU':
-        base_img = get_base_by_name("frame_1.jpg")
-    else:
+    # 0 for default mode (random)
+    if model == DEFAULT:
         base_img = random_Basemap()
+    # Otherwise we use the character id
+    else:
+        base_img = get_base_by_name("frame_" + str(model) + ".jpg")
 
     filename = os.path.basename(base_img.path)
     charaid = filename.lstrip('frame_')
