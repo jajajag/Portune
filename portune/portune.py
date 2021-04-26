@@ -11,7 +11,7 @@ from hoshino.typing import *
 from .luck_desc import luck_desc
 from .luck_type import luck_type
 from PIL import Image, ImageSequence, ImageDraw, ImageFont
-from _pcr_data import CHARA_ID
+from ._pcr_data import CHARA_ID
 
 
 sv_help = '''
@@ -22,11 +22,11 @@ sv_help = '''
 #帮助文本
 sv = Service('portune', help_=sv_help, bundle='pcr娱乐')
 
-lmt = DailyNumberLimiter(5)
+lmt = DailyNumberLimiter(2)
 #设置每日抽签的次数，默认为1
 Data_Path = hoshino.config.RES_DIR
 #也可以直接填写为res文件夹所在位置，例：absPath = "C:/res/"
-Img_Path = 'portunedata/imgbase'
+Img_Path = Data_Path + 'img/portunedata/imgbase'
 DEFAULT = 0
 
 
