@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import re
 import random
 import os
@@ -52,11 +51,11 @@ async def portune_chara(bot, ev):
 
     # Extract the name of the character
     name = ev.message.extract_plain_text().strip()[1:-1]
-    if name in CHARA_ID:
-        # Map the name to its id
-        model = CHARA_ID[name]
-    else:
-        model = 0
+    # Return if the name is not in the db
+    if name not in CHARA_ID:
+        await bot.finish(ev, f'图库里没有这个角色，试试其他的吧~', at_sender=True)
+    # Map the name to its id
+    model = CHARA_ID[name]
 
     pic = drawing_pic(model)
     await bot.send(ev, pic, at_sender=True)
@@ -114,14 +113,15 @@ def drawing_pic(model) -> Image:
     return img
 
 
-
 def get_base_by_name(filename) -> R.ResImg:
     return R.img(os.path.join(Img_Path, filename))
+
 
 def random_Basemap() -> R.ResImg:
     base_dir = R.img(Img_Path).path
     random_img = random.choice(os.listdir(base_dir))
     return R.img(os.path.join(Img_Path, random_img))
+
 
 def get_info(charaid):
     for i in luck_desc:
@@ -131,12 +131,14 @@ def get_info(charaid):
             return desc, get_luck_type(desc)
     raise Exception('luck description not found')
 
+
 def get_luck_type(desc):
     target_luck_type = desc['good-luck']
     for i in luck_type:
         if i['good-luck'] == target_luck_type:
             return i['name']
     raise Exception('luck type not found')
+
 
 def decrement(text):
     length = len(text)
@@ -168,6 +170,7 @@ def decrement(text):
         else:
             result.append(text[i * cardinality:(i + 1) * cardinality])
     return result
+
 
 def vertical(str):
     list = []
