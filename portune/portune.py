@@ -42,18 +42,22 @@ async def portune(bot, ev):
     await bot.send(ev, pic, at_sender=True)
 
 
-@sv.on_fullmatch(('^抽.+签$'))
+@sv.on_rex(('^抽.+签$'))
 async def portune_chara(bot, ev):
-    uid = ev.user_id
-    if not lmt.check(uid):
-        await bot.finish(ev, f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
-    lmt.increase(uid)
-
     # Extract the name of the character
     name = ev.message.extract_plain_text().strip()[1:-1]
-    # Return if the name is not in the db
+    # 1. Return if the name is not in the db
     if name not in CHARA_ID:
-        await bot.finish(ev, f'图库里没有这个角色，试试其他的吧~', at_sender=True)
+        await bot.finish(ev,
+                f'图库里没有这个角色，试试其他的吧~', at_sender=True)
+
+    # 2. Return if reach the limit
+    uid = ev.user_id
+    if not lmt.check(uid):
+        await bot.finish(ev,
+                f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
+    lmt.increase(uid)
+
     # Map the name to its id
     model = CHARA_ID[name]
 
