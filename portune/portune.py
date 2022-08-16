@@ -29,7 +29,7 @@ Img_Path = Data_Path + 'img/portunedata/imgbase'
 DEFAULT = 0
 
 
-@sv.on_prefix(('抽签', '人品', '运势'), only_to_me=True)
+@sv.on_prefix(('抽签', '人品', '运势'))#, only_to_me=True)
 async def portune(bot, ev):
     uid = ev.user_id
     if not lmt.check(uid):
