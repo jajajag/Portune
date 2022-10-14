@@ -1,7 +1,7 @@
 luck_desc = [
     {
         "charaid": ["1", "2"],
-        "_name": "凯露",
+        "_name": "凯留",
         "type": [
             {
                 "good-luck": 10,
@@ -479,7 +479,7 @@ luck_desc = [
     },
     {
         "charaid": ["31", "32"],
-        "_name": "未奏希",
+        "_name": "禊",
         "type": [
             {
                 "good-luck": 8,
@@ -569,7 +569,7 @@ luck_desc = [
     },
     {
         "charaid": ["37", "38"],
-        "_name": "日和莉",
+        "_name": "日和",
         "type": [
             {
                 "good-luck": 9,
@@ -689,7 +689,7 @@ luck_desc = [
     },
         {
         "charaid": ["45", "46"],
-        "_name": "克里斯蒂娜",
+        "_name": "克莉丝提娜",
         "type": [
             {
                 "good-luck": 8,
@@ -985,7 +985,7 @@ luck_desc = [
     },
         {
         "charaid": ["65"],
-        "_name": "晶",
+        "_name": "拉比林斯达",
         "type": [
             {
                 "good-luck": 10,

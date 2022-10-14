@@ -50,14 +50,22 @@ async def portune_chara(bot, ev):
         await bot.finish(ev,
                 f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
 
-    # Extract the name of the character
+    # JAG: Extract the name of the character
     name = ev.message.extract_plain_text().strip()[1:-1]
-    # 2. Return if the name is not in the db
-    model = DEFAULT
+    # 2.1 Check if the name is in _pcr_data.py
     for key in CHARA_NAME:
         if name in CHARA_NAME[key]:
-            model = key
-    if model == DEFAULT:
+            model = CHARA_NAME[key][0]
+            break
+    else:
+        await bot.finish(ev,
+                f'图库里没有这个角色，试试其他的吧~', at_sender=True)
+    # 2.2 Check if the name is in luck_desc.py
+    for luck in luck_desc:
+        if luck['_name'] == model:
+            model = random.choice(luck['charaid'])
+            break
+    else:
         await bot.finish(ev,
                 f'图库里没有这个角色，试试其他的吧~', at_sender=True)
 
@@ -75,10 +83,9 @@ def drawing_pic(model) -> Image:
     # 0 for default mode (random)
     if model == DEFAULT:
         base_img = random_Basemap()
-    # Otherwise we use the character id
+    # JAG: Otherwise we use the character id
     else:
-        base_img = get_base_by_name(
-                str(model) + str(random.randint(0, 1)) + ".jpg")
+        base_img = get_base_by_name('frame_' + model + '.jpg')
 
     filename = os.path.basename(base_img.path)
     charaid = filename.lstrip('frame_')
