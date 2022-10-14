@@ -5,12 +5,12 @@ import os
 import hoshino
 from hoshino.util import DailyNumberLimiter
 from hoshino import R, Service
+from hoshino.modules.priconne._pcr_data import CHARA_NAME
 from hoshino.util import pic2b64
 from hoshino.typing import *
 from .luck_desc import luck_desc
 from .luck_type import luck_type
 from PIL import Image, ImageSequence, ImageDraw, ImageFont
-from ._pcr_data import CHARA_ID
 
 
 sv_help = '''
@@ -44,24 +44,25 @@ async def portune(bot, ev):
 
 @sv.on_rex(('^抽.+签$'))
 async def portune_chara(bot, ev):
-    # Extract the name of the character
-    name = ev.message.extract_plain_text().strip()[1:-1]
-    # 1. Return if the name is not in the db
-    if name not in CHARA_ID:
-        await bot.finish(ev,
-                f'图库里没有这个角色，试试其他的吧~', at_sender=True)
-
-    # 2. Return if reach the limit
+    # 1. Return if reach the limit
     uid = ev.user_id
     if not lmt.check(uid):
         await bot.finish(ev,
                 f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
-    lmt.increase(uid)
 
-    # Map the name to its id
-    model = CHARA_ID[name]
+    # Extract the name of the character
+    name = ev.message.extract_plain_text().strip()[1:-1]
+    # 2. Return if the name is not in the db
+    model = DEFAULT
+    for key in CHARA_NAME:
+        if name in CHARA_NAME[key]:
+            model = key
+    if model == DEFAULT:
+        await bot.finish(ev,
+                f'图库里没有这个角色，试试其他的吧~', at_sender=True)
 
     pic = drawing_pic(model)
+    lmt.increase(uid)
     await bot.send(ev, pic, at_sender=True)
 
 
@@ -76,7 +77,7 @@ def drawing_pic(model) -> Image:
         base_img = random_Basemap()
     # Otherwise we use the character id
     else:
-        base_img = get_base_by_name("frame_" + str(model) + ".jpg")
+        base_img = get_base_by_name(model + str(random.randint(0, 1)) + ".jpg")
 
     filename = os.path.basename(base_img.path)
     charaid = filename.lstrip('frame_')
