@@ -77,7 +77,8 @@ def drawing_pic(model) -> Image:
         base_img = random_Basemap()
     # Otherwise we use the character id
     else:
-        base_img = get_base_by_name(model + str(random.randint(0, 1)) + ".jpg")
+        base_img = get_base_by_name(
+                str(model) + str(random.randint(0, 1)) + ".jpg")
 
     filename = os.path.basename(base_img.path)
     charaid = filename.lstrip('frame_')
