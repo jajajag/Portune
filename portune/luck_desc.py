@@ -1,7 +1,9 @@
-luck_desc = [
-    {
-        "charaid": ["1", "2"],
-        "_name": "凯留",
+luck_desc = {
+    "凯留": {
+        "charaid": [
+            "1",
+            "2"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -49,9 +51,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["3", "4"],
-        "_name": "初音",
+    "初音": {
+        "charaid": [
+            "3",
+            "4"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -83,9 +87,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["5", "6"],
-        "_name": "杏奈",
+    "杏奈": {
+        "charaid": [
+            "5",
+            "6"
+        ],
         "type": [
             {
                 "good-luck": 8,
@@ -113,9 +119,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["7", "8"],
-        "_name": "优妮",
+    "优妮": {
+        "charaid": [
+            "7",
+            "8"
+        ],
         "type": [
             {
                 "good-luck": 7,
@@ -147,9 +155,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["9", "10"],
-        "_name": "琪爱儿",
+    "琪爱儿": {
+        "charaid": [
+            "9",
+            "10"
+        ],
         "type": [
             {
                 "good-luck": 9,
@@ -177,9 +187,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["11", "12"],
-        "_name": "克萝依",
+    "克萝依": {
+        "charaid": [
+            "11",
+            "12"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -207,9 +219,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["13", "14"],
-        "_name": "静流",
+    "静流": {
+        "charaid": [
+            "13",
+            "14"
+        ],
         "type": [
             {
                 "good-luck": 9,
@@ -237,9 +251,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["15", "16"],
-        "_name": "惠理子",
+    "惠理子": {
+        "charaid": [
+            "15",
+            "16"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -267,9 +283,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["17", "18"],
-        "_name": "优花梨",
+    "优花梨": {
+        "charaid": [
+            "17",
+            "18"
+        ],
         "type": [
             {
                 "good-luck": 8,
@@ -297,9 +315,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["19", "20"],
-        "_name": "空花",
+    "空花": {
+        "charaid": [
+            "19",
+            "20"
+        ],
         "type": [
             {
                 "good-luck": 9,
@@ -327,9 +347,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["21", "22"],
-        "_name": "忍",
+    "忍": {
+        "charaid": [
+            "21",
+            "22"
+        ],
         "type": [
             {
                 "good-luck": 8,
@@ -357,9 +379,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["23", "24"],
-        "_name": "真步",
+    "真步": {
+        "charaid": [
+            "23",
+            "24"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -387,9 +411,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["25", "26"],
-        "_name": "茜里",
+    "茜里": {
+        "charaid": [
+            "25",
+            "26"
+        ],
         "type": [
             {
                 "good-luck": 6,
@@ -417,9 +443,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["27", "28"],
-        "_name": "镜华",
+    "镜华": {
+        "charaid": [
+            "27",
+            "28"
+        ],
         "type": [
             {
                 "good-luck": 7,
@@ -447,9 +475,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["29", "30"],
-        "_name": "美美",
+    "美美": {
+        "charaid": [
+            "29",
+            "30"
+        ],
         "type": [
             {
                 "good-luck": 8,
@@ -477,9 +507,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["31", "32"],
-        "_name": "禊",
+    "禊": {
+        "charaid": [
+            "31",
+            "32"
+        ],
         "type": [
             {
                 "good-luck": 8,
@@ -507,9 +539,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["33", "34"],
-        "_name": "怜",
+    "怜": {
+        "charaid": [
+            "33",
+            "34"
+        ],
         "type": [
             {
                 "good-luck": 7,
@@ -537,9 +571,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["35", "36"],
-        "_name": "优衣",
+    "优衣": {
+        "charaid": [
+            "35",
+            "36"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -567,9 +603,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["37", "38"],
-        "_name": "日和",
+    "日和": {
+        "charaid": [
+            "37",
+            "38"
+        ],
         "type": [
             {
                 "good-luck": 9,
@@ -597,9 +635,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["39", "40"],
-        "_name": "贪吃佩可",
+    "贪吃佩可": {
+        "charaid": [
+            "39",
+            "40"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -627,9 +667,11 @@ luck_desc = [
             }
         ]
     },
-    {
-        "charaid": ["41", "42"],
-        "_name": "可可萝",
+    "可可萝": {
+        "charaid": [
+            "41",
+            "42"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -657,9 +699,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["43", "44"],
-        "_name": "璃乃",
+    "璃乃": {
+        "charaid": [
+            "43",
+            "44"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -687,9 +731,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["45", "46"],
-        "_name": "克莉丝提娜",
+    "克莉丝提娜": {
+        "charaid": [
+            "45",
+            "46"
+        ],
         "type": [
             {
                 "good-luck": 8,
@@ -717,9 +763,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["47", "48"],
-        "_name": "栞",
+    "栞": {
+        "charaid": [
+            "47",
+            "48"
+        ],
         "type": [
             {
                 "good-luck": 9,
@@ -747,9 +795,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["49", "50"],
-        "_name": "铃奈",
+    "铃奈": {
+        "charaid": [
+            "49",
+            "50"
+        ],
         "type": [
             {
                 "good-luck": 7,
@@ -777,9 +827,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["51", "52"],
-        "_name": "咲恋",
+    "咲恋": {
+        "charaid": [
+            "51",
+            "52"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -807,9 +859,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["53", "54"],
-        "_name": "露娜",
+    "露娜": {
+        "charaid": [
+            "53",
+            "54"
+        ],
         "type": [
             {
                 "good-luck": 7,
@@ -833,9 +887,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["55", "56"],
-        "_name": "霞",
+    "霞": {
+        "charaid": [
+            "55",
+            "56"
+        ],
         "type": [
             {
                 "good-luck": 8,
@@ -863,9 +919,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["57", "58"],
-        "_name": "真琴",
+    "真琴": {
+        "charaid": [
+            "57",
+            "58"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -893,9 +951,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["59", "60"],
-        "_name": "香织",
+    "香织": {
+        "charaid": [
+            "59",
+            "60"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -923,9 +983,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["61", "62"],
-        "_name": "亚里莎",
+    "亚里莎": {
+        "charaid": [
+            "61",
+            "62"
+        ],
         "type": [
             {
                 "good-luck": 7,
@@ -953,9 +1015,11 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["63", "64"],
-        "_name": "望",
+    "望": {
+        "charaid": [
+            "63",
+            "64"
+        ],
         "type": [
             {
                 "good-luck": 9,
@@ -983,9 +1047,10 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["65"],
-        "_name": "拉比林斯达",
+    "拉比林斯达": {
+        "charaid": [
+            "65"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -1009,9 +1074,10 @@ luck_desc = [
             }
         ]
     },
-        {
-        "charaid": ["66"],
-        "_name": "花凛",
+    "花凛": {
+        "charaid": [
+            "66"
+        ],
         "type": [
             {
                 "good-luck": 10,
@@ -1039,4 +1105,4 @@ luck_desc = [
             }
         ]
     }
-]
+}

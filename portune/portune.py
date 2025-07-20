@@ -3,6 +3,7 @@ import re
 import random
 import os
 import hoshino
+from datetime import date
 from hoshino.util import DailyNumberLimiter
 from hoshino import R, Service
 from hoshino.modules.priconne._pcr_data import CHARA_NAME
@@ -13,79 +14,64 @@ from .luck_type import luck_type
 from PIL import Image, ImageSequence, ImageDraw, ImageFont
 
 
+#帮助文本
 sv_help = '''
 [抽签|人品|运势|抽凯露签]
 随机角色/指定凯露预测今日运势
 准确率高达114.514%！
 '''.strip()
-#帮助文本
 sv = Service('portune', help_=sv_help, bundle='pcr娱乐')
 
-lmt = DailyNumberLimiter(2)
-#设置每日抽签的次数，默认为1
-Data_Path = hoshino.config.RES_DIR
+
 #也可以直接填写为res文件夹所在位置，例：absPath = "C:/res/"
+Data_Path = hoshino.config.RES_DIR
 Img_Path = Data_Path + 'img/portunedata/imgbase'
-DEFAULT = 0
+config = {}
 
 
-@sv.on_prefix(('抽签', '人品', '运势'))#, only_to_me=True)
-async def portune(bot, ev):
-    uid = ev.user_id
-    if not lmt.check(uid):
-        await bot.finish(ev, f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
-    lmt.increase(uid)
-
-    model = DEFAULT
-
-    pic = drawing_pic(model)
-    await bot.send(ev, pic, at_sender=True)
-
-
-@sv.on_rex(('^抽.+签$'))
+@sv.on_rex(r'^抽(.+)?签|人品|运势$')
 async def portune_chara(bot, ev):
-    # 1. Return if reach the limit
+    # 0. Initialize parameters
+    global config
     uid = ev.user_id
-    if not lmt.check(uid):
-        await bot.finish(ev,
-                f'你今天已经抽过签了，欢迎明天再来~', at_sender=True)
+    name = ev['match'].group(1)
+    today = date.today()
+    formal_name = None
 
-    # JAG: Extract the name of the character
-    name = ev.message.extract_plain_text().strip()[1:-1]
-    # 2.1 Check if the name is in _pcr_data.py
+    # 1. Check if the name is in _pcr_data.py
     for key in CHARA_NAME:
         if name in CHARA_NAME[key]:
-            model = CHARA_NAME[key][0]
+            formal_name = CHARA_NAME[key][0]
             break
-    else:
-        await bot.finish(ev,
-                f'图库里没有这个角色，试试其他的吧~', at_sender=True)
-    # 2.2 Check if the name is in luck_desc.py
-    for luck in luck_desc:
-        if luck['_name'] == model:
-            model = random.choice(luck['charaid'])
-            break
-    else:
-        await bot.finish(ev,
-                f'图库里没有这个角色，试试其他的吧~', at_sender=True)
 
-    pic = drawing_pic(model)
-    lmt.increase(uid)
+    # 2. If the name is not valid
+    if name and (not formal_name or formal_name not in luck_desc):
+        await bot.finish(ev,'图库里没有这个角色，试试其他的吧~', at_sender=True)
+
+    # 3. Check if the user has drawn a fortune today
+    if uid not in config or config[uid]['date'] != today:
+        # Sample a chara or use the specified one
+        chara = formal_name if formal_name else random.choice(list(luck_desc))
+        charaid = random.choice(luck_desc[chara]['charaid'])
+        # Save the configuration
+        config[uid]['base_img'] = get_base_by_name('frame_' + charaid + '.jpg')
+        config[uid]['text'], config[uid]['title'] = get_info(charaid)
+        config[uid]['name'] = chara
+        config[uid]['date'] = today
+    elif formal_name != config[uid]['name']:
+        await bot.finish(ev, f'你今天已经抽过{config[uid]["name"]}签了~', 
+                         at_sender=True)
+
+    pic = drawing_pic(config[uid]['base_img'], config[uid]['text'], 
+                      config[uid]['title'])
     await bot.send(ev, pic, at_sender=True)
 
 
-def drawing_pic(model) -> Image:
+def drawing_pic(base_img, text, title) -> Image:
     fontPath = {
         'title': R.img('portunedata/font/Mamelon.otf').path,
         'text': R.img('portunedata/font/sakura.ttf').path
     }
-
-    # 0 for default mode (random)
-    if model == DEFAULT:
-        base_img = random_Basemap()
-    # JAG: Otherwise we use the character id
-    else:
-        base_img = get_base_by_name('frame_' + model + '.jpg')
 
     filename = os.path.basename(base_img.path)
     charaid = filename.lstrip('frame_')
@@ -94,7 +80,6 @@ def drawing_pic(model) -> Image:
     img = base_img.open()
     # Draw title
     draw = ImageDraw.Draw(img)
-    text, title = get_info(charaid)
 
     text = text['content']
     font_size = 45
@@ -102,8 +87,9 @@ def drawing_pic(model) -> Image:
     image_font_center = (140, 99)
     ttfront = ImageFont.truetype(fontPath['title'], font_size)
     font_length = ttfront.getsize(title)
-    draw.text((image_font_center[0]-font_length[0]/2, image_font_center[1]-font_length[1]/2),
-                title, fill=color,font=ttfront)
+    draw.text((image_font_center[0]-font_length[0]/2,
+               image_font_center[1]-font_length[1]/2),
+               title, fill=color, font=ttfront)
     # Text rendering
     font_size = 25
     color = '#323232'
