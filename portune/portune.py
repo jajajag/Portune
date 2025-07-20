@@ -59,7 +59,7 @@ async def portune_chara(bot, ev):
         config[uid]['text'], config[uid]['title'] = get_info(charaid)
         config[uid]['name'] = chara
         config[uid]['date'] = today
-    elif formal_name != config[uid]['name']:
+    elif name and formal_name != config[uid]['name']:
         await bot.finish(ev, f'你今天已经抽过{config[uid]["name"]}签了~', 
                          at_sender=True)
 
