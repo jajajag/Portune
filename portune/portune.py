@@ -126,8 +126,8 @@ def randombbasemap() -> R.ResImg:
 
 def get_info(charaid):
     for i in luck_desc:
-        if charaid in i['charaid']:
-            typewords = i['type']
+        if charaid in luck_desc[i]['charaid']:
+            typewords = luck_desc[i]['type']
             desc = random.choice(typewords)
             return desc, get_luck_type(desc)
     raise Exception('luck description not found')
