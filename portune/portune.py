@@ -54,6 +54,7 @@ async def portune_chara(bot, ev):
         chara = formal_name if formal_name else random.choice(list(luck_desc))
         charaid = random.choice(luck_desc[chara]['charaid'])
         # Save the configuration
+        config[uid] = {}
         config[uid]['base_img'] = get_base_by_name('frame_' + charaid + '.jpg')
         config[uid]['text'], config[uid]['title'] = get_info(charaid)
         config[uid]['name'] = chara
