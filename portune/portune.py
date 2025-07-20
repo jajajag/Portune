@@ -55,7 +55,7 @@ async def portune_chara(bot, ev):
         charaid = random.choice(luck_desc[chara]['charaid'])
         # Save the configuration
         config[uid] = {}
-        config[uid]['base_img'] = get_base_by_name('frame_' + charaid + '.jpg')
+        config[uid]['base_img'] = get_basemap_by_id(charaid)
         config[uid]['text'], config[uid]['title'] = get_info(charaid)
         config[uid]['name'] = chara
         config[uid]['date'] = today
@@ -113,11 +113,12 @@ def drawing_pic(base_img, text, title) -> Image:
     return img
 
 
-def get_base_by_name(filename) -> R.ResImg:
+def get_basemap_by_id(charaid) -> R.ResImg:
+    filename = 'frame_' + charaid + '.jpg'
     return R.img(os.path.join(Img_Path, filename))
 
 
-def random_Basemap() -> R.ResImg:
+def randombbasemap() -> R.ResImg:
     base_dir = R.img(Img_Path).path
     random_img = random.choice(os.listdir(base_dir))
     return R.img(os.path.join(Img_Path, random_img))
